@@ -1,0 +1,54 @@
+ 
+# Ignore Visual Studio files
+.vs/
+.vscode/
+.idea/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Dd]ebug*/*/
+[Dd]ist*/*/
+obj/
+bin/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer files from WIX
+*.wixpdb
+
+# Windows image file (for web projects)
+*.jpg
+*.png
+*.gif
+*.ico
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# npm package files
+node_modules/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Tye
+.tye/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
