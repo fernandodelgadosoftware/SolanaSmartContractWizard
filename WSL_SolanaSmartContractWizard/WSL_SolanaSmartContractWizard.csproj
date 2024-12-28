@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\magicisreal.png" />
+    <None Remove="Images\solanawizard.webp" />
+    <None Remove="Images\torch.gif" />
+    <None Remove="Images\wizard-hat-icon.avif" />
+    <None Remove="Sounds\coin.mp3" />
+    <None Remove="Sounds\coindrop.wav" />
+    <None Remove="Sounds\page-flip-10.wav" />
+    <None Remove="Sounds\pageturn.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    <PackageReference Include="WPFAnimatedGif" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\magicisreal.png" />
+    <Resource Include="Images\solanawizard.webp" />
+    <Resource Include="Images\torch.gif" />
+    <Resource Include="Images\wizard-hat-icon.avif" />
+    <Content Include="Sounds\page-flip-10.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Sounds\coin.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Sounds\coindrop.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Sounds\pageturn.mp3" />
+  </ItemGroup>
+
+</Project>

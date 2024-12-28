@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "a+42MKW0fRrCPxDFmsZLGpx9ASxUjZXe51cmHw+7oxkINioCaeYpWv2Yv/N/kk6NG4GOyAoG7wjdS9CSwzb03A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\admin\\source\\repos\\SolanaSmartContractWizard\\WSL_SolanaSmartContractWizard\\WSL_SolanaSmartContractWizard.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.io.pipelines\\9.0.0\\system.io.pipelines.9.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.text.encodings.web\\9.0.0\\system.text.encodings.web.9.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.text.json\\9.0.0\\system.text.json.9.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
