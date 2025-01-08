@@ -1,64 +1,183 @@
 ﻿<UserControl x:Class="WSL_SolanaSmartContractWizard.Views.EnvironmentSetupView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              xmlns:local="clr-namespace:WSL_SolanaSmartContractWizard.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Margin="10">
-            <TextBlock Text="Environment Setup Status" FontWeight="Bold" FontSize="16"/>
-            <TextBlock Text="Ensure all dependencies are installed and configured correctly." Margin="0,5,0,10"/>
-            <Button Content="Check Dependencies"
-                    Width="150" Height="30"
-                    Click="CheckDependenciesButton_Click"/>
+        <Grid.ColumnDefinitions>
+            <!-- Left column for text, 50% of the width -->
+            <ColumnDefinition Width="*"/>
+            <!-- Right column for the image, 50% of the width -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Padding="10" Grid.Column="0">
+            <Border.Background>
+                <SolidColorBrush Color="LightGray"/>
+            </Border.Background>
             <StackPanel Margin="10">
-                <!-- WSL -->
-                <TextBlock Text="WSL Installed:" FontWeight="Bold" />
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                    <CheckBox IsChecked="{Binding IsWSLInstalled}" IsEnabled="False" Content="WSL" />
-                    <Button Content="Download Latest" Click="DownloadWSLButton_Click" Margin="10,0,0,0" />
-                </StackPanel>
-                <TextBox Text="{Binding WSLOutput}" 
-                         TextWrapping="Wrap" 
-                         Foreground="Gray" 
-                         Margin="5,0,0,10" 
-                         IsReadOnly="True" 
-                         BorderThickness="0"
-                         Background="Transparent" />
+                <TextBlock Text="Windows Subsystem for Linux Setup Status" FontWeight="Bold" FontSize="16"/>
+                <TextBlock Text="Check that WSL is activated, installed and configured correctly." Margin="0,5,0,10"/>
+                <Button Content="Check WSL"
+                    Width="150" Height="30"
+                    HorizontalAlignment="Left"
+                    Click="CheckDependenciesButton_Click"/>
+                <StackPanel Margin="10">
 
-                <!-- Rust -->
-                <TextBlock Text="Rust Installed:" FontWeight="Bold" />
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                    <CheckBox IsChecked="{Binding IsRustInstalled}" IsEnabled="False" Content="Rust" />
-                    <Button Content="Download Latest" Click="DownloadRustButton_Click" Margin="10,0,0,0" />
-                </StackPanel>
-                <TextBox Text="{Binding RustOutput}" 
-                         TextWrapping="Wrap" 
-                         Foreground="Gray" 
-                         Margin="5,0,0,10" 
-                         IsReadOnly="True" 
-                         BorderThickness="0"
-                         Background="Transparent" />
+                    <!-- WSL -->
+                    <TextBlock Text="WSL Installed:" FontWeight="Bold" />
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                        <CheckBox IsChecked="{Binding IsWSLInstalled}" IsEnabled="False" Content="WSL" />
+                        <Button Content="Download Latest" Click="DownloadWSLButton_Click" Margin="10,0,0,0" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Text="C:\Users\admin>wsl --version"
+							TextWrapping="Wrap"
+							Foreground="White"
+							Background="Black"
+							FontFamily="Consolas"
+							FontSize="12"
+							IsReadOnly="True"
+							BorderThickness="0"
+							AcceptsReturn="True" />
+                        <TextBox Text="{Binding WSLOutput}"
+                             TextWrapping="Wrap"
+                             Foreground="White"
+                             Background="Black"
+                             FontFamily="Consolas"
+                             FontSize="12"
+                             IsReadOnly="True"
+                             VerticalScrollBarVisibility="Auto"
+                             AcceptsReturn="True" />
+                    </StackPanel>
 
-                <!-- Solana CLI -->
-                <TextBlock Text="Solana CLI Installed:" FontWeight="Bold" />
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                    <CheckBox IsChecked="{Binding IsSolanaCLIInstalled}" IsEnabled="False" Content="Solana CLI" />
-                    <Button Content="Download Latest" Click="DownloadSolanaButton_Click" Margin="10,0,0,0" />
+                    <!-- Solana CLI -->
+                    <TextBlock Text="Solana CLI Installed:" FontWeight="Bold" />
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                        <CheckBox IsChecked="{Binding IsSolanaCLIInstalled}" IsEnabled="False" Content="Solana CLI" />
+                        <Button Content="Download Latest" Click="DownloadSolanaButton_Click" Margin="10,0,0,0" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Text="C:\Users\admin>solana --version"
+							TextWrapping="Wrap"
+							Foreground="White"
+							Background="Black"
+							FontFamily="Consolas"
+							FontSize="12"
+							IsReadOnly="True"
+							BorderThickness="0"
+							AcceptsReturn="True" />
+                        <TextBox Text="{Binding SolanaOutput}"
+                             TextWrapping="Wrap"
+                             Foreground="White"
+                             Background="Black"
+                             FontFamily="Consolas"
+                             FontSize="12"
+                             IsReadOnly="True"
+                             VerticalScrollBarVisibility="Auto"
+                             AcceptsReturn="True" />
+                    </StackPanel>
+
+                    <!-- Solana CLI -->
+                    <TextBlock Text="Node Installed in your WSL:" FontWeight="Bold" />
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                        <CheckBox IsChecked="{Binding IsNodeInstalled}" IsEnabled="False" Content="Node in WSL" />
+                        <Button Content="Download Latest" Click="DownloadNodeButton_Click" Margin="10,0,0,0" />
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Text="C:\Users\admin>node --version"
+							TextWrapping="Wrap"
+							Foreground="White"
+							Background="Black"
+							FontFamily="Consolas"
+							FontSize="12"
+							IsReadOnly="True"
+							BorderThickness="0"
+							AcceptsReturn="True" />
+                        <TextBox Text="{Binding NodeOutput}"
+                             TextWrapping="Wrap"
+                             Foreground="White"
+                             Background="Black"
+                             FontFamily="Consolas"
+                             FontSize="12"
+                             IsReadOnly="True"
+                             VerticalScrollBarVisibility="Auto"
+                             AcceptsReturn="True" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Name="FlameGifLeft" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="100">
+                            <gif:ImageBehavior.AnimatedSource>
+                                <BitmapImage UriSource="../Images/torch.gif"/>
+                            </gif:ImageBehavior.AnimatedSource>
+                        </Image>
+                        <Image Name="FlameGifCenter" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="100" Height="100">
+                            <gif:ImageBehavior.AnimatedSource>
+                                <BitmapImage UriSource="../Images/torch.gif"/>
+                            </gif:ImageBehavior.AnimatedSource>
+                        </Image>
+                        <Image Name="FlameGifRight" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="100" Height="100">
+                            <gif:ImageBehavior.AnimatedSource>
+                                <BitmapImage UriSource="../Images/torch.gif"/>
+                            </gif:ImageBehavior.AnimatedSource>
+                        </Image>
+                    </StackPanel>
+
+
+                    <TextBlock FontFamily="Baskerville Old Face" Text="You Will Suffer For Your Art" FontSize="20" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap" FontStyle="Oblique"/>
+                    <TextBlock FontFamily="Felix Titling" 
+                               TextWrapping="Wrap" 
+                               HorizontalAlignment="Center" 
+                               Margin="10,10,10,10" 
+                               FontWeight="DemiBold" 
+                               FontSize="12">
+                        <Run Text="Ah, young apprentice, let me illuminate the arcane workings of this wondrous spell!" />
+                        <Run Text="WSL, or the Windows Subsystem for Linux, conjures the very essence of a Linux realm within the confines of your Windows stronghold. It is the magical foundation upon which tools like Rust, Cargo, and Rustup—artifacts of crafting and creation—may thrive." />
+                        <LineBreak />
+                        <LineBreak />
+                        <Run Text="Without the enchantment of WSL properly invoked and woven, these mystical tools shall refuse to manifest, for they cannot exist in a Windows world unprepared for their power. Thus, ensuring WSL's spell is cast and its realm stable is the first and most vital incantation before summoning the might of Rust's tools. Only then shall the ritual proceed without misfortune!" />
+                        <LineBreak />
+                        <LineBreak />
+                        <Run Text="These enchanted tools are the key to forging the Solana CLI, the powerful artifact that unlocks the secrets of the blockchain." />
+                    </TextBlock>
+
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Name="FlameGifLeftLower" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="100">
+                            <gif:ImageBehavior.AnimatedSource>
+                                <BitmapImage UriSource="../Images/torch.gif"/>
+                            </gif:ImageBehavior.AnimatedSource>
+                        </Image>
+                        <Image Name="FlameGifCenterLower" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="100" Height="100">
+                            <gif:ImageBehavior.AnimatedSource>
+                                <BitmapImage UriSource="../Images/torch.gif"/>
+                            </gif:ImageBehavior.AnimatedSource>
+                        </Image>
+                        <Image Name="FlameGifRightLower" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="100" Height="100">
+                            <gif:ImageBehavior.AnimatedSource>
+                                <BitmapImage UriSource="../Images/torch.gif"/>
+                            </gif:ImageBehavior.AnimatedSource>
+                        </Image>
+                    </StackPanel>
                 </StackPanel>
-                <TextBox Text="{Binding SolanaOutput}" 
-                         TextWrapping="Wrap" 
-                         Foreground="Gray" 
-                         Margin="5,0,0,10" 
-                         IsReadOnly="True" 
-                         BorderThickness="0"
-                         Background="Transparent" />
             </StackPanel>
-        </StackPanel>
-        
-        <MediaElement x:Name="CoinSound" Source="C:\Users\admin\source\repos\SolanaSmartContractWizard\WSL_SolanaSmartContractWizard\Sounds\coindrop.wav" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
+        </Border>
 
+        <!-- Right side (Image) -->
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Padding="10" Grid.Column="1">
+            <Border.Background>
+                <SolidColorBrush Color="LightGray"/>
+            </Border.Background>
+            <Image Name="MarioPipe" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="auto">
+                <gif:ImageBehavior.AnimatedSource>
+                    <BitmapImage UriSource="../Images/mariopipe.gif"/>
+                </gif:ImageBehavior.AnimatedSource>
+            </Image>
+        </Border>
     </Grid>
 </UserControl>

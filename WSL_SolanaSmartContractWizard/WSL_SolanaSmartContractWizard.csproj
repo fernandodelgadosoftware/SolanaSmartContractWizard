@@ -6,19 +6,15 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+	<ApplicationIcon>Images\wizard-hat-icon.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Images\magicisreal.png" />
-    <None Remove="Images\solanawizard.webp" />
-    <None Remove="Images\torch.gif" />
-    <None Remove="Images\wizard-hat-icon.avif" />
-    <None Remove="Sounds\coin.mp3" />
-    <None Remove="Sounds\coindrop.wav" />
-    <None Remove="Sounds\page-flip-10.wav" />
-    <None Remove="Sounds\pageturn.mp3" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<None Remove="Images\hondasmash.gif" />
+		<None Remove="Images\wizard-hat-icon.ico" />
+		<None Remove="Sounds\ken.wav" />
+	</ItemGroup>
+	
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.0" />
@@ -26,20 +22,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\hondasmash.gif" />
     <Resource Include="Images\magicisreal.png" />
+    <Resource Include="Images\mariopipe.gif" />
     <Resource Include="Images\solanawizard.webp" />
     <Resource Include="Images\torch.gif" />
     <Resource Include="Images\wizard-hat-icon.avif" />
-    <Content Include="Sounds\page-flip-10.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="Sounds\coin.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="Images\wizard-hat-icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Sounds\coindrop.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="Sounds\coindrops.wav" />
+    <Resource Include="Sounds\ken.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Sounds\pageturn.mp3" />
+    <Resource Include="Sounds\pipe.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Sounds\page-flip-10.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

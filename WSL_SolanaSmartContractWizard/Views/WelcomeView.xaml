@@ -41,11 +41,36 @@
                         </gif:ImageBehavior.AnimatedSource>
                     </Image>
                 </StackPanel>
-                <TextBlock FontFamily="Baskerville Old Face" Text="Behold, the Solana Smart Contract Wizard!" FontSize="20" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap" FontStyle="Oblique"/>
-                <TextBlock FontFamily="Felix Titling" Text="Designatum ad scalas, Solana pro applicationibus blockchain aedificata est ut ad miliones usorum perveniat. Locum optimizando pro strato blockchain non curandum, progressores possunt se concentrare in aedificatione applicationum ad pervenire ad aptationem mercatus productorum. Non solum nunc scalare potest ad necessitates applicationum blockchain, sed etiam rete continuatur optime ad experientiam usoris mente.
+                <TextBlock FontFamily="Baskerville Old Face" Text="You Will Suffer For Your Art" FontSize="20" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap" FontStyle="Oblique"/>
+                <!--<TextBlock FontFamily="Felix Titling" Text="Designatum ad scalas, Solana pro applicationibus blockchain aedificata est ut ad miliones usorum perveniat. Locum optimizando pro strato blockchain non curandum, progressores possunt se concentrare in aedificatione applicationum ad pervenire ad aptationem mercatus productorum. Non solum nunc scalare potest ad necessitates applicationum blockchain, sed etiam rete continuatur optime ad experientiam usoris mente.
 
 Aedificare optimam experientiam usoris in applicatione est summa prioritas pro progressoribus. Cum blockchainibus, experientia usoris saepe limitatur a technologia subiecta, causando tempora responsionis lentissima et altae fees. Feodorum humilitas Solana et tempora confirmationis 400ms permittunt progressoribus aedificare applicationes quae usui amicae sunt et omnibus praesto." 
-                           TextWrapping="Wrap" HorizontalAlignment="Center" Margin="10,10,10,10" FontWeight="DemiBold" FontSize="10"/>
+                           TextWrapping="Wrap" HorizontalAlignment="Center" Margin="10,10,10,10" FontWeight="DemiBold" FontSize="12"/>-->
+
+                <TextBlock FontFamily="Felix Titling" 
+                           TextWrapping="Wrap" 
+                           HorizontalAlignment="Center" 
+                           Margin="50,10,10,10" 
+                           FontWeight="DemiBold" 
+                           FontSize="12">
+                    <TextBlock.Inlines>
+                        <Run Text="To you who desire to cross this threshold, do you know what awaits you?&#x0A;&#x0A;"/>
+                        <Run Text="I know, replied the girl.&#x0A;&#x0A;"/>
+                        <Run Text="Cold, hunger, abhorrence, derision, contempt, abuse, prison, disease, and death!&#x0A;&#x0A;"/>
+                        <Run Text="I know, I am ready, I shall endure all blows.&#x0A;&#x0A;"/>
+                        <Run Text="Not from enemies alone, but also from relatives, from friends.&#x0A;&#x0A;"/>
+                        <Run Text="Yes, even from them . . .&#x0A;&#x0A;"/>
+                        <Run Text="Are you ready even to commit a crime?&#x0A;&#x0A;"/>
+                        <Run Text="I am ready for crime, too.&#x0A;&#x0A;"/>
+                        <Run Text="Do you know that you may be disillusioned in that which you believe, that you may discover that you were mistaken, that you ruined your young life in vain?&#x0A;&#x0A;"/>
+                        <Run Text="I know that, too.&#x0A;&#x0A;"/>
+                        <Run Text="Enter!&#x0A;&#x0A;"/>
+                        <Run Text="The girl crossed the threshold, and a heavy curtain fell behind her.&#x0A;&#x0A;"/>
+                        <Run Text="Fool! said some one, gnashing his teeth.&#x0A;&#x0A;"/>
+                        <Run Text="Saint! some one uttered in reply. —Ivan Turgeniev"/>
+                    </TextBlock.Inlines>
+                </TextBlock>
+
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image Name="FlameGifLeftLower" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="100">
                         <gif:ImageBehavior.AnimatedSource>
@@ -63,6 +88,7 @@ Aedificare optimam experientiam usoris in applicatione est summa prioritas pro p
                         </gif:ImageBehavior.AnimatedSource>
                     </Image>
                 </StackPanel>
+                <TextBlock FontFamily="Baskerville Old Face" Text="At that final moment, each goes alone..." FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" TextAlignment="Center" TextWrapping="Wrap" FontStyle="Oblique"/>
             </StackPanel>
         </Border>
 
@@ -73,9 +99,5 @@ Aedificare optimam experientiam usoris in applicatione est summa prioritas pro p
             </Border.Background>
             <Image Grid.Column="1" Source="../Images/solanawizard.webp" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-
-        <!-- Button to go to next tab -->
-        <Button Content="Turn The Page, Bob Seger" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,0" Width="200" Height="40" Click="NextTabButton_Click"/>
-
     </Grid>
 </UserControl>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WSL_SolanaSmartContractWizard.Services;
 
@@ -21,6 +22,8 @@ namespace WSL_SolanaSmartContractWizard.ViewModels
         private string _rustOutput;
         private bool _isSolanaCLIInstalled;
         private string _solanaOutput;
+        private bool _isNodeInstalled;
+        private string _nodeOutput;
 
         public bool IsWSLInstalled
         {
@@ -58,6 +61,18 @@ namespace WSL_SolanaSmartContractWizard.ViewModels
             set { _solanaOutput = value; OnPropertyChanged(nameof(SolanaOutput)); }
         }
 
+        public bool IsNodeInstalled
+        {
+            get => _isNodeInstalled;
+            set { _isNodeInstalled = value; OnPropertyChanged(nameof(IsNodeInstalled)); }
+        }
+
+        public string NodeOutput
+        {
+            get => _nodeOutput;
+            set { _nodeOutput = value; OnPropertyChanged(nameof(NodeOutput)); }
+        }
+
         public void CheckDependencies()
         {
             var (wslInstalled, wslOutput) = DependencyCheckService.CheckWSL();
@@ -71,6 +86,10 @@ namespace WSL_SolanaSmartContractWizard.ViewModels
             var (solanaInstalled, solanaOutput) = DependencyCheckService.CheckSolanaCLI();
             IsSolanaCLIInstalled = solanaInstalled;
             SolanaOutput = solanaOutput;
+
+            var (nodeInstalled, nodeOutput) = DependencyCheckService.CheckNode();
+            IsNodeInstalled = nodeInstalled;
+            NodeOutput = nodeOutput;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -80,44 +99,4 @@ namespace WSL_SolanaSmartContractWizard.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
-    //old implementation below for posterity
-    //public class EnvironmentSetupViewModel : ObservableObject
-    //{
-    //    private bool _isWSLInstalled;
-    //    public bool IsWSLInstalled
-    //    {
-    //        get => _isWSLInstalled;
-    //        set => SetProperty(ref _isWSLInstalled, value);
-    //    }
-
-    //    private bool _isRustInstalled;
-    //    public bool IsRustInstalled
-    //    {
-    //        get => _isRustInstalled;
-    //        set => SetProperty(ref _isRustInstalled, value);
-    //    }
-
-    //    private bool _isSolanaCLIInstalled;
-    //    public bool IsSolanaCLIInstalled
-    //    {
-    //        get => _isSolanaCLIInstalled;
-    //        set => SetProperty(ref _isSolanaCLIInstalled, value);
-    //    }
-
-    //    //public ObservableCollection<string> DependencyStatuses { get; } = new ObservableCollection<string>
-    //    //{
-    //    //    "WSL Status: Not Installed",
-    //    //    "Solana CLI: Not Configured",
-    //    //    "Rust Compiler: Missing"
-    //    //};
-
-    //    public EnvironmentSetupViewModel()
-    //    {
-    //        IsWSLInstalled = DependencyCheckService.IsWSLInstalled();
-    //        IsRustInstalled = DependencyCheckService.IsRustInstalled();
-    //        IsSolanaCLIInstalled = DependencyCheckService.IsSolanaCLIInstalled();
-    //    }
-    //}
-
 }

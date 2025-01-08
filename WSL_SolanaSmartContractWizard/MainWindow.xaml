@@ -11,7 +11,7 @@
         xmlns:views="clr-namespace:WSL_SolanaSmartContractWizard.Views"
         mc:Ignorable="d"
         Icon="pack://application:,,,/Images/wizard-hat-icon.avif"
-        Title="Solana Smart Contract Wizard" Height="800" Width="1200">
+        Title="Solana Smart Contract Wizard" Height="1200" Width="1942">
 
     <Window.Resources>
         <converters:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibilityConverter"/>
@@ -64,54 +64,19 @@
                 <views:WelcomeView />
             </TabItem>
             <!-- Environment Setup Tab -->
-            <TabItem Header="Environment Setup">
+            <TabItem Header="WSL Setup">
                 <views:EnvironmentSetupView />
+            </TabItem>
+
+            <TabItem Header="Rust and Cargo Setup">
+                <views:RustCargoView />
             </TabItem>
 
             <!-- Wallet Configuration Tab -->
             <TabItem Header="Wallet Configuration">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <!-- Left column for text, 50% of the width -->
-                        <ColumnDefinition Width="2*"/>
-                        <!-- Right column for the image, 50% of the width -->
-                        <ColumnDefinition Width="3*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Padding="10" Grid.Column="0">
-                        <Border.Background>
-                            <SolidColorBrush Color="LightGray"/>
-                        </Border.Background>
-                        <StackPanel Margin="10">
-                            <TextBlock Text="Wallet Configuration" FontSize="18" FontWeight="Bold"/>
-                            <TextBlock Text="Connect or create a wallet for deploying smart contracts." Margin="0,5,0,10" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="14"/>
-                            <Button Content="Create New Wallet" Width="150" Height="30" />
-                            <Button Content="Connect Existing Wallet" Width="150" Height="30" Margin="0,10,0,0" />
-
-                            <!-- Wallet Address TextBox with Placeholder -->
-                            <Grid Margin="0,20,0,0">
-                                <TextBox x:Name="WalletAddressTextBox" />
-                                <TextBlock Text="Wallet Address"
-                                   Foreground="Gray"
-                                   IsHitTestVisible="False"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   Margin="5,0,0,0"
-                                   Visibility="{Binding Text, ElementName=WalletAddressTextBox, Converter={StaticResource StringEmptyToVisibilityConverter}}" />
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Right side (Image) -->
-                    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Padding="10" Grid.Column="1">
-                        <Border.Background>
-                            <SolidColorBrush Color="LightGray"/>
-                        </Border.Background>
-                        <Image Grid.Column="1" Source="Images/magicisreal.png" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    </Border>
-                </Grid>
+                <views:WalletConfigurationView />
             </TabItem>
-
+            
             <!-- Smart Contract Configuration Tab -->
             <TabItem Header="Smart Contract Configuration">
                 <StackPanel Margin="10">
@@ -199,6 +164,9 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <MediaElement x:Name="TabSound" Source="C:\Users\admin\source\repos\SolanaSmartContractWizard\WSL_SolanaSmartContractWizard\Sounds\page-flip-10.wav" LoadedBehavior="Manual" UnloadedBehavior="Manual" />
+
+        <!-- Change Tab Buttons -->        
+        <Button x:Name="PreviousTabButton" Content="Previous Tablet" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,10,0,0" Width="200" Height="40" Click="PreviousTabButton_Click" Visibility="Collapsed"/>
+        <Button x:Name="NextTabButton" Content="Next tablet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,10,0,0" Width="200" Height="40" Click="NextTabButton_Click"/>
     </Grid>
 </Window>

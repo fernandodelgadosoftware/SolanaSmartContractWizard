@@ -24,13 +24,5 @@ namespace WSL_SolanaSmartContractWizard.Views
         {
             InitializeComponent();
         }
-
-        public void NextTabButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Logic to switch tabs
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.MainTabControl.SelectedIndex = 1; // Switch to the second tab (index 1)
-        }
-
     }
 }

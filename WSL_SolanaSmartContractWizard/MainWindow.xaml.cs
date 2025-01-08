@@ -13,111 +13,135 @@ using WpfAnimatedGif;
 
 namespace WSL_SolanaSmartContractWizard
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
             MainTabControl.SelectionChanged += MainTabControl_SelectionChanged;
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+
+            var selectedTab = mainWindow.MainTabControl.Items[1] as TabItem;
+            if (selectedTab?.Content is FrameworkElement content)
+            {
+                var marioPipe = content.FindName("MarioPipe") as Image;
+                if (marioPipe != null)
+                {
+                    ImageBehavior.SetAutoStart(marioPipe, false);
+                }
+            }
+
+            var selectedTab2 = mainWindow.MainTabControl.Items[2] as TabItem;
+            if (selectedTab2?.Content is FrameworkElement content2)
+            {
+                var hondaSmash = content2.FindName("HondaSmash") as Image;
+                if (hondaSmash != null)
+                {
+                    ImageBehavior.SetAutoStart(hondaSmash, false);
+                }
+            }
         }
 
-        //SoundPlayer player = new SoundPlayer(@"Sounds/page-flip-10.wav"); // Adjust the path if needed
-        //try
-        //{
-        //    player.Play();
-        //}
-        //catch (Exception ex)
-        //{
-        //    MessageBox.Show($"Error playing sound: {ex.Message}");
-        //}
+        public async void NextTabButton_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            
+            if (mainWindow.MainTabControl.SelectedIndex == 1)
+            {
+                var selectedTab = mainWindow.MainTabControl.Items[1] as TabItem;
+                if (selectedTab?.Content is FrameworkElement content)
+                {                   
+                    var marioPipe = content.FindName("MarioPipe") as Image;
+                    if (marioPipe != null)
+                    {
+                        ImageBehavior.SetAutoStart(marioPipe, true);
+                        ImageBehavior.SetRepeatBehavior(marioPipe, new System.Windows.Media.Animation.RepeatBehavior(1));
+                        //await Task.Delay(600);
+                        PlayPipeSound();
+                        await Task.Delay(1200);
+                        
+                        ImageBehavior.SetAutoStart(marioPipe, false);
+                        ImageBehavior.SetRepeatBehavior(marioPipe, new System.Windows.Media.Animation.RepeatBehavior(0)); 
+                    }
+                }
+            }
 
-        //    private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //    {
-        //        // Code to execute when tab changes
-        //        if (MainTabControl.SelectedIndex == 0) // Welcome Tab
-        //        {
-        //            // Play sound for Welcome tab
-        //            PlayTabChangeSound();
-        //        }
-        //        else if (MainTabControl.SelectedIndex == 1) // Environment Setup Tab
-        //        {
-        //            // Play sound for Environment Setup tab
-        //            PlayTabChangeSound();
-        //        }
-        //    }
+            if (mainWindow.MainTabControl.SelectedIndex == 2)
+            {
+                var selectedTab = mainWindow.MainTabControl.Items[2] as TabItem;
+                if (selectedTab?.Content is FrameworkElement content)
+                {
+                    var hondaSmash = content.FindName("HondaSmash") as Image;
+                    if (hondaSmash != null)
+                    {
+                        ImageBehavior.SetAutoStart(hondaSmash, true);
+                        ImageBehavior.SetRepeatBehavior(hondaSmash, new System.Windows.Media.Animation.RepeatBehavior(1));
 
-        //    private static void PlayTabChangeSound()
-        //    {
-        //        // Assuming you have a sound file named "TabChangeSound.wav" in the "Sounds" folder
-        //        var soundPlayer = new SoundPlayer("Sounds/page-flip-10.wav");
-        //        soundPlayer.Play();
-        //    }
-        //}
+
+                        PlayKenSound();
+                        await Task.Delay(1200);
+
+                        ImageBehavior.SetAutoStart(hondaSmash, false);
+                        ImageBehavior.SetRepeatBehavior(hondaSmash, new System.Windows.Media.Animation.RepeatBehavior(0));
+                    }
+                }
+            }
+
+            mainWindow.MainTabControl.SelectedIndex++;
+        }
+
+        public void PreviousTabButton_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.MainTabControl.SelectedIndex--;            
+        }
 
         private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PlayTabChangeSoundAndWait();
-        }
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            var currentTabIndex = mainWindow.MainTabControl.SelectedIndex;
 
-        private void PlayTabChangeSoundAndWait()
+            PreviousTabButton.Visibility = currentTabIndex > 0 ? Visibility.Visible : Visibility.Collapsed;
+            NextTabButton.Visibility = currentTabIndex < mainWindow.MainTabControl.Items.Count - 1 ? Visibility.Visible : Visibility.Collapsed;
+            PlayTabChangeSound();
+        }
+        private void PlayTabChangeSound()
         {
-            if (TabSound != null)
-            {
-                try
-                {
-                    // Get the absolute file path
-                    string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sounds", "page-flip-10.wav");
-
-                    // Check if the file exists
-                    if (System.IO.File.Exists(filePath))
-                    {
-                        TabSound.Source = new Uri(filePath, UriKind.Absolute);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Sound file not found at: {filePath}");
-                        return;
-                    }
-
-                    // Log various properties for debugging (optional)
-                    Console.WriteLine($"Source: {TabSound.Source}");
-                    Console.WriteLine($"Position: {TabSound.Position}");
-                    Console.WriteLine($"NaturalDuration: {TabSound.NaturalDuration}");
-                    Console.WriteLine($"Volume: {TabSound.Volume}");
-                    Console.WriteLine($"Balance: {TabSound.Balance}");
-                    Console.WriteLine($"SpeedRatio: {TabSound.SpeedRatio}");
-                    Console.WriteLine($"HasAudio: {TabSound.HasAudio}");
-
-                    // Ensure the sound file is valid
-                    if (TabSound.Source == null || string.IsNullOrEmpty(TabSound.Source.LocalPath) || !System.IO.File.Exists(TabSound.Source.LocalPath))
-                    {
-                        MessageBox.Show("Sound file not found or path is empty.");
-                        return;
-                    }
-
-                    // Set the initial playback settings
-                    TabSound.Volume = 1.0;  // Set to full volume
-                    TabSound.Position = TimeSpan.Zero;  // Start from the beginning of the file
-
-                    // Play the sound
-                    TabSound.Play();
-
-                }
-                catch (Exception ex)
-                {
-                    // Handle any errors that occur during playback
-                    MessageBox.Show($"Error playing sound: {ex.Message}");
-                }
-            }
-            else
-            {
-                MessageBox.Show("MediaElement for tab sound not found.");
-            }
+            PlaySound("page-flip-10.wav");
         }
 
+        private void PlayPipeSound()
+        {
+            PlaySound("pipe.wav");
+        }
 
+        private void PlayKenSound()
+        {
+            PlaySound("ken.wav");
+        }
+
+        private void PlaySound(string soundPath)
+        {
+            try
+            {
+                var sri = Application.GetResourceStream(new Uri($"pack://application:,,,/WSL_SolanaSmartContractWizard;component/Sounds/{soundPath}"));
+
+                if (sri != null)
+                {
+                    using (var s = sri.Stream)
+                    {
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(s);
+
+                        player.Load();
+                        Thread.Sleep(500);
+                        player.Play();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error playing sound ({soundPath}): {ex.Message}");
+            }
+        }
     }
 }

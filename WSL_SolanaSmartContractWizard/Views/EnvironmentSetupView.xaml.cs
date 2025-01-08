@@ -14,220 +14,136 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Controls;
 using WSL_SolanaSmartContractWizard.Services;
 using WSL_SolanaSmartContractWizard.ViewModels;
 
 
 namespace WSL_SolanaSmartContractWizard.Views
 {
-    /// <summary>
-    /// Interaction logic for EnvironmentSetupView.xaml
-    /// </summary>
     public partial class EnvironmentSetupView : UserControl
     {
         public EnvironmentSetupView()
         {
             InitializeComponent();
             DataContext = new EnvironmentSetupViewModel();
+
         }
 
-        //private void CheckDependenciesButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        //{
-        //    if (DataContext is EnvironmentSetupViewModel viewModel)
-        //    {
-        //        // Run the CheckDependencies method
-        //        viewModel.CheckDependencies();
-
-        //        // Play sound for WSL if it is installed
-        //        if (viewModel.IsWSLInstalled)
-        //        {
-        //            PlaySound();
-        //        }
-
-        //        // Play sound for Rust if it is installed
-        //        if (viewModel.IsRustInstalled)
-        //        {
-        //            PlaySound();
-        //        }
-
-        //        // Play sound for Solana CLI if it is installed
-        //        if (viewModel.IsSolanaCLIInstalled)
-        //        {
-        //            PlaySound();
-        //        }
-        //    }
-        //}
-
-        //private void PlaySound()
-        //{
-        //    try
-        //    {
-        //        // Ensure CoinSound has a valid Source
-        //        if (CoinSound.Source != null)
-        //        {
-        //            string filePath = CoinSound.Source.AbsolutePath;
-
-        //            // Ensure the file exists before trying to play it
-        //            if (System.IO.File.Exists(filePath))
-        //            {
-        //                using (SoundPlayer player = new SoundPlayer(filePath))
-        //                {
-        //                    player.PlaySync();
-        //                }
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine($"Sound file not found: {filePath}");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("CoinSound.Source is not set.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Handle any errors while playing sound
-        //        Console.WriteLine($"Error playing sound: {ex.Message}");
-        //    }
-        //}
-
-        private async void CheckDependenciesButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void CheckDependenciesButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (DataContext is EnvironmentSetupViewModel viewModel)
             {
                 // Run the CheckDependencies method
                 viewModel.CheckDependencies();
 
-                // Play sound and update checkbox for WSL
+                // Play sound for WSL if it is installed
                 if (viewModel.IsWSLInstalled)
                 {
-                    PlaySoundAsync();
-                    await Task.Delay(500); // Allow UI to update and slight delay for user experience
-                    await UpdateUIAsync();
+                    PlayCoinDropSound();
                 }
 
-                // Play sound and update checkbox for Rust
+                // Play sound for Rust if it is installed
                 if (viewModel.IsRustInstalled)
                 {
-                    PlaySoundAsync();
-                    await Task.Delay(500);
-                    await UpdateUIAsync();
+                    PlayCoinDropSound();
                 }
 
-                // Play sound and update checkbox for Solana CLI
+                // Play sound for Solana CLI if it is installed
                 if (viewModel.IsSolanaCLIInstalled)
                 {
-                    PlaySoundAsync();
-                    await Task.Delay(500);
-                    await UpdateUIAsync();
+                    PlayCoinDropSound();
                 }
             }
         }
 
-        private void PlaySoundAsync()
+        //private async void CheckDependenciesButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (DataContext is EnvironmentSetupViewModel viewModel)
+        //    {
+        //        OutputTextBox.Clear(); // Clear previous output
+
+        //        await viewModel.CheckDependenciesAsync(output =>
+        //        {
+        //            OutputTextBox.AppendText(output + Environment.NewLine);
+        //            OutputTextBox.ScrollToEnd();
+        //        });
+
+        //        // Play sounds for installed dependencies
+        //        if (viewModel.IsWSLInstalled) PlayCoinDropSound();
+        //        if (viewModel.IsRustInstalled) PlayCoinDropSound();
+        //        if (viewModel.IsSolanaCLIInstalled) PlayCoinDropSound();
+        //    }
+        //}
+
+        //private async void CheckDependenciesButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (DataContext is EnvironmentSetupViewModel viewModel)
+        //    {
+        //        // Clear all previous outputs
+        //        WSLOutputTextBox.Clear();
+        //        RustOutputTextBox.Clear();
+        //        SolanaOutputTextBox.Clear();
+
+        //        // Check dependencies asynchronously
+        //        await viewModel.CheckDependenciesAsync(output =>
+        //        {
+        //            // This callback updates the appropriate TextBox based on the output
+        //            if (output.Contains("WSL"))
+        //            {
+        //                WSLOutputTextBox.AppendText(output + Environment.NewLine);
+        //                WSLOutputTextBox.ScrollToEnd();
+        //            }
+        //            else if (output.Contains("rustc"))
+        //            {
+        //                RustOutputTextBox.AppendText(output + Environment.NewLine);
+        //                RustOutputTextBox.ScrollToEnd();
+        //            }
+        //            else if (output.Contains("solana-cli"))
+        //            {
+        //                SolanaOutputTextBox.AppendText(output + Environment.NewLine);
+        //                SolanaOutputTextBox.ScrollToEnd();
+        //            }
+        //        });
+
+        //        // Play sounds for installed dependencies if they are installed
+        //        if (viewModel.IsWSLInstalled) PlayCoinDropSound();
+        //        if (viewModel.IsRustInstalled) PlayCoinDropSound();
+        //        if (viewModel.IsSolanaCLIInstalled) PlayCoinDropSound();
+        //    }
+        //}
+
+
+        private void PlayCoinDropSound()
         {
             try
             {
-                // Ensure CoinSound has a valid Source
-                if (CoinSound.Source != null)
-                {
-                    string filePath = CoinSound.Source.AbsolutePath;
+                var uri = new Uri("pack://application:,,,/WSL_SolanaSmartContractWizard;component/Sounds/coindrops.wav");
+                var sri = Application.GetResourceStream(uri);
 
-                    // Ensure the file exists before trying to play it
-                    if (System.IO.File.Exists(filePath))
+                if (sri != null)
+                {
+                    Console.WriteLine("Stream is not null.");
+
+                    using (var s = sri.Stream)
                     {
-                        using (SoundPlayer player = new SoundPlayer(filePath))
-                        {
-                            player.Play(); // Non-blocking sound play
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Sound file not found: {filePath}");
+                        Console.WriteLine($"Stream length: {s.Length} bytes");
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(s);
+                        player.Load();
+                        player.PlaySync();
+                        Console.WriteLine("Sound should have played.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("CoinSound.Source is not set.");
+                    Console.WriteLine("Stream is null.");
                 }
             }
             catch (Exception ex)
             {
-                // Handle any errors while playing sound
                 Console.WriteLine($"Error playing sound: {ex.Message}");
             }
-        }
-
-        //private async void CheckDependenciesButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        //{
-        //    if (DataContext is EnvironmentSetupViewModel viewModel)
-        //    {
-        //        // Run the CheckDependencies method
-        //        viewModel.CheckDependencies();
-
-        //        // Play sound and update checkbox for WSL
-        //        if (viewModel.IsWSLInstalled)
-        //        {
-        //            await PlaySoundAsync();
-        //            await Task.Delay(500); // Small delay for user experience
-        //            await UpdateUIAsync(); // Force UI to update
-        //        }
-
-        //        // Play sound and update checkbox for Rust
-        //        if (viewModel.IsRustInstalled)
-        //        {
-        //            await PlaySoundAsync();
-        //            await Task.Delay(500);
-        //            await UpdateUIAsync();
-        //        }
-
-        //        // Play sound and update checkbox for Solana CLI
-        //        if (viewModel.IsSolanaCLIInstalled)
-        //        {
-        //            await PlaySoundAsync();
-        //            await Task.Delay(500);
-        //            await UpdateUIAsync();
-        //        }
-        //    }
-        //}
-
-        //private Task PlaySoundAsync()
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        try
-        //        {
-        //            // Ensure CoinSound has a valid Source
-        //            if (CoinSound.Source != null)
-        //            {
-        //                string filePath = CoinSound.Source.AbsolutePath;
-
-        //                // Ensure the file exists before trying to play it
-        //                if (System.IO.File.Exists(filePath))
-        //                {
-        //                    using (SoundPlayer player = new SoundPlayer(filePath))
-        //                    {
-        //                        player.PlaySync(); // Block until sound finishes in this task
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    Console.WriteLine($"Sound file not found: {filePath}");
-        //                }
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine("CoinSound.Source is not set.");
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            // Handle any errors while playing sound
-        //            Console.WriteLine($"Error playing sound: {ex.Message}");
-        //        }
-        //    });
-        //}
+        }        
 
         private Task UpdateUIAsync()
         {
@@ -275,7 +191,7 @@ namespace WSL_SolanaSmartContractWizard.Views
                     if (installedVersion != latestVersion)
                     {
                         MessageBox.Show($"An older version of Rust is installed (v{installedVersion}). Updating to v{latestVersion}...");
-                        DependencyCheckService.DownloadAndInstallRust();
+                        await DependencyCheckService.DownloadAndInstallRust();
                     }
                     else
                     {
@@ -322,7 +238,39 @@ namespace WSL_SolanaSmartContractWizard.Views
             }
         }
 
-        // Helper methods for version comparison
+        private async void DownloadNodeButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var (isNodeInstalled, nodeVersionOutput) = DependencyCheckService.CheckNode();
+
+                if (!isNodeInstalled)
+                {
+                    MessageBox.Show("Node is not installed in WSL. Downloading and installing the latest version...");
+                    await DependencyCheckService.DownloadAndInstallNode();
+                }
+                else
+                {
+                    var installedVersion = ParseVersion(nodeVersionOutput);
+                    var latestVersion = GetLatestNodeVersion();
+
+                    if (installedVersion != latestVersion)
+                    {
+                        MessageBox.Show($"An older version of Node is installed (v{installedVersion}). Updating to v{latestVersion}...");
+                        await DependencyCheckService.DownloadAndInstallNode();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You already have the latest version of Node installed.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+
         private string ParseVersion(string versionOutput)
         {
             var parts = versionOutput.Split(' ');
@@ -330,6 +278,11 @@ namespace WSL_SolanaSmartContractWizard.Views
         }
 
         private string GetLatestSolanaVersion()
+        {
+            return "1.11.0";  // Example: Replace with actual logic to fetch the latest version
+        }
+
+        private string GetLatestNodeVersion()
         {
             return "1.11.0";  // Example: Replace with actual logic to fetch the latest version
         }
