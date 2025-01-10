@@ -8,3 +8,37 @@
 8. Sound with all button clicks?
 9. progress notifications and bars for downloads, and download to where? include way to set path of where to download
 
+
+Dec 28:
+Move  
+
+
+
+
+To you who desire to cross this threshold, do you know what awaits you?
+
+I know, replied the girl.
+
+Cold, hunger, abhorrence, derision, contempt, abuse, prison, disease, and death!
+
+I know, I am ready, I shall endure all blows.
+
+Not from enemies alone, but also from relatives, from friends.
+
+Yes, even from them . . .
+
+Are you ready even to commit a crime?
+
+I .am ready for crime, too.
+
+Do you know that you may be disillusioned in that which you believe, that you may iscover that you were mistaken, that you ruined your young life in vain?
+
+I know that, too.
+
+Enter!
+
+The girl crossed the threshold, and a heavy curtain fell behind her.
+
+Fool! said some one, gnashing his teeth.
+
+Saint! some one uttered in reply. —Ivan Turgeniev
